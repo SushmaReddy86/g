@@ -1,0 +1,11 @@
+import cv2
+import numpy as np
+img=cv2.imread('cimg1.jpg')
+cn=cv2.Canny(img,100,200)
+ww=cv2.HoughLinesP(cn,1,np.pi/180,60,maxLineGap=30)
+for l in ww:
+    x0,y0,x1,y1=l[0]
+    cv2.line(img,(x0,y0),(x1,y1),(0,0,220),1)
+cv2.imshow("hough",img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
