@@ -1,0 +1,17 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import cv2
+img = cv2.imread("img.jpg")
+hist = cv2.calcHist([img], [0], None, [256], [0, 256])
+plt.plot(hist)
+plt.title('Histogram (Blue Channel)')
+plt.xlabel('Pixel Value')
+plt.ylabel('Frequency')
+plt.show()
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+equ = cv2.equalizeHist(gray)
+plt.hist(equ.flatten(), bins=256, range=(0, 255), color='gray')
+plt.title("Equalized Histogram")
+plt.xlabel('Pixel Value')
+plt.ylabel('Frequency')
+plt.show()
