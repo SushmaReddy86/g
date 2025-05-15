@@ -1,0 +1,17 @@
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_digits
+from sklearn.cluster import KMeans
+dg=load_digits()
+clf=KMeans(n_clusters=10,random_state=40)
+x=dg.data
+img=dg.images
+clf.fit(x)
+seg=clf.cluster_centers_[clf.labels_]
+seg=seg.reshape(img.shape)
+plt.subplot(2,1,1)
+plt.imshow(x[2].reshape(8,8))
+plt.title("original")
+plt.subplot(2,1,2)
+plt.imshow(seg[2])
+plt.title("seg")
+plt.show()
