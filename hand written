@@ -1,0 +1,16 @@
+import matplotlib.pyplot as plt
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import classification_report, accuracy_score
+from tensorflow.keras.datasets import mnist
+(xtr,ytr),(xts,yts)=mnist.load_data()
+xtr=xtr.reshape(-1,784)/255.0
+xts=xts.reshape(-1,784)/255.0
+clf=GaussianNB()
+clf.fit(xtr[:5000],ytr[:5000])
+ypr=clf.predict(xts[:1000])
+print("Accuracy", accuracy_score(yts[:1000],ypr))
+print("classification_report",classification_report(yts[:1000],ypr))
+plt.subplot(2,1,1)
+plt.imshow(xts[7].reshape(28,28))
+plt.title(f"pred: {ypr[7]} \n true: {yts[7]}")
+plt.show
