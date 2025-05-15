@@ -1,0 +1,15 @@
+import cv2
+import numpy as np
+img=cv2.imread('cimg1.jpg')
+ker=np.ones((5,5),np.uint8)
+er=cv2.erode(img,ker)
+di=cv2.dilate(img,ker)
+bimg=cv2.threshold(img,127,225,cv2.THRESH_BINARY)[1]
+op=cv2.morphologyEx(bimg,cv2.MORPH_OPEN,ker)
+cl=cv2.morphologyEx(bimg,cv2.MORPH_CLOSE,ker)
+cv2.imshow("eroded",er)
+cv2.imshow("dilate",di)
+cv2.imshow("eroded",op)
+cv2.imshow("dilate",cl)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
