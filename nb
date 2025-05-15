@@ -1,0 +1,17 @@
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_digits
+from sklearn.naive_bayes import GaussianNB
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, classification_report
+clf=GaussianNB()
+dg=load_digits()
+x,y,img=dg.data,dg.target,dg.images
+xtr,xts,ytr,yts,imtr,imts=train_test_split(x,y,img,test_size=0.3,random_state=42)
+clf.fit(xtr,ytr)
+ypr=clf.predict(xts)
+print(accuracy_score(yts,ypr))
+print("Classification report",classification_report(yts,ypr))
+plt.subplot(2,2,2)
+plt.imshow(imts[2])
+plt.title(f"trueval: {yts[2]} \n predval: {ypr[2]}")
+plt.show
