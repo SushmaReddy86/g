@@ -1,0 +1,17 @@
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_digits
+from sklearn.decomposition import PCA
+import cv2
+pca=PCA(n_components=10)
+dg=load_digits()
+x=dg.data
+ft=pca.fit_transform(x)
+res=pca.inverse_transform(ft)
+plt.subplot(1,2,1)
+plt.imshow(res[1].reshape(8,8))
+plt.title("pca")
+plt.show()
+plt.subplot(1,2,2)
+plt.imshow(x[1].reshape(8,8))
+plt.title("origonal")
+plt.show()
