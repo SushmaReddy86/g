@@ -1,17 +1,28 @@
 import cv2
-video = cv2.VideoCapture("im.jpg")
-frame_width = int(video.get(3))  
-frame_height = int(video.get(4))  
-fps = int(video.get(cv2.CAP_PROP_FPS)) 
-fourcc = cv2.VideoWriter_fourcc(*'XVID') 
-output = cv2.VideoWriter('C:Downloads\\ved.mp4', fourcc, fps, (frame_width, frame_height))
+
+# Load the video file (not an image)
+video = cv2.VideoCapture("video.mp4")  # Replace with your actual video file name
+
+# Check if video opened successfully
+if not video.isOpened():
+    print("Error: Could not open video file.")
+    exit()
+
+# Get video propertie
+frame_width = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))
+frame_height = int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))
+fps = int(video.get(cv2.CAP_PROP_FPS))
+fourcc = cv2.VideoWriter_fourcc(*'XVID')
+output = cv2.VideoWriter('C:\\Downloads\\ved.avi', fourcc, fps, (frame_width, frame_height))
+
 while True:
     ret, frame = video.read()
     if not ret:
         break
     cv2.imshow('Video', frame)
+    output.write(frame)
     if cv2.waitKey(25) & 0xFF == ord('q'):
-        break# Release everything when done
+        break
 video.release()
 output.release()
 cv2.destroyAllWindows()
