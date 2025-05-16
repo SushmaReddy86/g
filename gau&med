@@ -1,0 +1,10 @@
+img=cv2.imread("im.jpg")
+gau=cv2.GaussianBlur(img,(5,5),0)
+plt.imshow(gau)
+plt.axis('off')
+plt.show()
+
+med=cv2.medianBlur(img,5)
+plt.imshow(med)
+plt.axis('off')
+plt.show()
